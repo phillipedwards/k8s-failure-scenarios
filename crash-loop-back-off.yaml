@@ -1,0 +1,21 @@
+# CrashLoopBackOff - container exits immediately
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crash-loop-demo
+  labels:
+    app: crash-loop-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crash-loop-demo
+  template:
+    metadata:
+      labels:
+        app: crash-loop-demo
+    spec:
+      containers:
+      - name: crash-loop
+        image: busybox:latest
+        command: ["sh", "-c", "exit 1"]  # Always exits with error

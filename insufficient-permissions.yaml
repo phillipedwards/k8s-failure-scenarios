@@ -1,0 +1,26 @@
+# Pod with insufficient RBAC permissions
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: restricted-sa
+  namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rbac-fail-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rbac-fail
+  template:
+    metadata:
+      labels:
+        app: rbac-fail
+    spec:
+      serviceAccountName: restricted-sa  # SA with no roles attached
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl
+        command: ["kubectl", "get", "pods"]  # Will fail due to no permissions

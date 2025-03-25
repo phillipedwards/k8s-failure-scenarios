@@ -1,0 +1,20 @@
+# Container fails due to wrong arguments
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wrong-args-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wrong-args
+  template:
+    metadata:
+      labels:
+        app: wrong-args
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        args:
+        - "--totally-invalid-flag"  # Redis will fail to start with invalid flag

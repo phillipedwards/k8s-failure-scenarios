@@ -1,0 +1,24 @@
+# Readiness/Liveness probe failures
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: probe-fail-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: probe-fail-demo
+  template:
+    metadata:
+      labels:
+        app: probe-fail-demo
+    spec:
+      containers:
+      - name: web
+        image: nginx
+        livenessProbe:
+          httpGet:
+            path: /nonexistent
+            port: 80
+          initialDelaySeconds: 3
+          periodSeconds: 3

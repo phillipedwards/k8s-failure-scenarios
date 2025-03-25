@@ -1,0 +1,22 @@
+# Failed init container blocks main container
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-fail-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: init-fail
+  template:
+    metadata:
+      labels:
+        app: init-fail
+    spec:
+      initContainers:
+      - name: init
+        image: busybox
+        command: ['sh', '-c', 'echo "Failing init"; exit 1']
+      containers:
+      - name: app
+        image: nginx  # Never starts due to init container failure

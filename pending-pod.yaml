@@ -1,0 +1,22 @@
+# Pod stuck in Pending due to insufficient resources
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-heavy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: resource-heavy
+  template:
+    metadata:
+      labels:
+        app: resource-heavy
+    spec:
+      containers:
+      - name: heavy
+        image: nginx
+        resources:
+          requests:
+            cpu: "100"  # Unrealistic CPU request
+            memory: "100Gi"

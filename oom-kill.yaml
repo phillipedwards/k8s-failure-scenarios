@@ -1,0 +1,25 @@
+# OOMKilled - container exceeds memory limits
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oom-kill-demo
+  labels:
+    app: oom-kill-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oom-kill-demo
+  template:
+    metadata:
+      labels:
+        app: oom-kill-demo
+    spec:
+      containers:
+      - name: memory-hog
+        image: polinux/stress
+        resources:
+          limits:
+            memory: "64Mi"
+        command: ["stress"]
+        args: ["--vm", "1", "--vm-bytes", "128M", "--vm-hang", "1"]  # Try to allocate more memory than limit

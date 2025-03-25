@@ -1,0 +1,25 @@
+# Pod stuck due to missing PVC
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: missing-volume-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: missing-volume
+  template:
+    metadata:
+      labels:
+        app: missing-volume
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: nonexistent-pvc

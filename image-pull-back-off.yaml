@@ -1,0 +1,20 @@
+# ImagePullBackOff - non-existent image
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pull-fail-demo
+  labels:
+    app: pull-fail-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pull-fail-demo
+  template:
+    metadata:
+      labels:
+        app: pull-fail-demo
+    spec:
+      containers:
+      - name: pull-fail
+        image: nonexistent/image:v999  # Image doesn't exist

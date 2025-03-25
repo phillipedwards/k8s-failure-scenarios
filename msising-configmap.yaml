@@ -1,0 +1,21 @@
+# Pod stuck due to missing ConfigMap
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: missing-config-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: missing-config
+  template:
+    metadata:
+      labels:
+        app: missing-config
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        envFrom:
+        - configMapRef:
+            name: nonexistent-config
