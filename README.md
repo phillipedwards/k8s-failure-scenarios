@@ -2,6 +2,8 @@
 
 This document outlines common Kubernetes failure scenarios for testing, troubleshooting practice, and validation of monitoring systems.
 
+**DISCLAIMER** These scenarios are intentionally simple and are intentionally setup to fail and cause problems inside a Kubernetes cluster.
+
 ## Basic Pod Failures
 
 ### CrashLoopBackOff
