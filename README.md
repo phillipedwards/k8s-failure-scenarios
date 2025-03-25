@@ -4,6 +4,14 @@ This document outlines common Kubernetes failure scenarios for testing, troubles
 
 **DISCLAIMER** These scenarios are intentionally simple and are intentionally setup to fail and cause problems inside a Kubernetes cluster.
 
+## How to deploy these scenarios
+
+The easiest and simplest way to deploy these scenarios into a Kubernetes cluster is through `kubectl`. Select the appropriate context for the target cluster.
+
+```bash
+kubectl apply -f ./failure-scenarios
+```
+
 ## Basic Pod Failures
 
 ### CrashLoopBackOff
