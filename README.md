@@ -2,10 +2,6 @@
 
 This document outlines common Kubernetes failure scenarios for testing, troubleshooting practice, and validation of monitoring systems.
 
-## **DISCLAIMER**
-
-These scenarios are intentionally simple and are intentionally setup to fail and cause problems inside a Kubernetes cluster.
-
 ## How to deploy these scenarios
 
 The easiest and simplest way to deploy these scenarios into a Kubernetes cluster is through `kubectl`. Select the appropriate context for the target cluster.
